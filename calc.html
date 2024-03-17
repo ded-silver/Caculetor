@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Жабаскрипт какулетор</title>
+  <style>
+    button{
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      margin: 5px;
+    }
+
+    input{
+      width: 234px;
+      height: 50px;
+      font-size: 20px;
+      margin: 5px;
+    }
+  </style>
 </head>
   <body>
     <h2>Какулетор</h2>
@@ -50,7 +65,8 @@
       function calculate() {
         var expression = document.getElementById('display').value;
         var result = eval(expression);
-        document.getElementById('display').value = result;}
+        document.getElementById('display').value = result;
+        }
     </script>
   </body>
 </html>
