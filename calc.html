@@ -30,49 +30,49 @@
     <input type="text" id="display" disabled>
 
     <div>
-      <button onclick="appendValue('')">^</button>
-      <button onclick="appendValue('')">x!</button>
-      <button onclick="appendValue('')">±</button>
+      <button onclick="appendValue('**')">^</button>
+      <button onclick="appendValue('factorial')">x!</button>
+      <button onclick="toggleSign('')">±</button>
       <button onclick="clearDisplay()">C</button>
-      <button onclick="appendValue('')">()</button>
-      <button onclick="appendValue('')">%</button>
-      <button onclick="appendValue('/')">÷</button>
+      <button onclick="appendBracket()">()</button>
+      <button onclick="appendValue(' / 100')">%</button>
+      <button onclick="appendValue(' / ')">÷</button>
     </div>
 
     <div>
-      <button onclick="appendValue('')">asin</button>
-      <button onclick="appendValue('')">sin</button>
-      <button onclick="appendValue('')">1/x</button>
-      <button onclick="appendValue('1')">1</button>
-      <button onclick="appendValue('2')">2</button>
-      <button onclick="appendValue('3')">3</button>
-      <button onclick="appendValue('*')">×</button>
-    </div>
-
-    <div>
-      <button onclick="appendValue('')">acos</button>
-      <button onclick="appendValue('')">cos</button>
-      <button onclick="appendValue('')">√</button>
-      <button onclick="appendValue('4')">4</button>
-      <button onclick="appendValue('5')">5</button>
-      <button onclick="appendValue('6')">6</button>
-      <button onclick="appendValue('-')">-</button>
-    </div>
-
-    <div>
-      <button onclick="appendValue('')">atan</button>
-      <button onclick="appendValue('')">tan</button>
-      <button onclick="appendValue('')">ln</button>
+      <button onclick="trigonometricFunction('asin')">asin</button>
+      <button onclick="trigonometricFunction('sin')">sin</button>
+      <button onclick="reciprocal()">1/x</button>
       <button onclick="appendValue('7')">7</button>
       <button onclick="appendValue('8')">8</button>
       <button onclick="appendValue('9')">9</button>
-      <button onclick="appendValue('+')">+</button>
+      <button onclick="appendValue(' * ')">×</button>
     </div>
 
     <div>
-      <button onclick="appendValue('')">lg</button>
-      <button onclick="appendValue('')">π</button>
-      <button onclick="appendValue('')">e</button>
+      <button onclick="trigonometricFunction('acos')">acos</button>
+      <button onclick="trigonometricFunction('cos')">cos</button>
+      <button onclick="squareRoot()">√</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue(' - ')">-</button>
+    </div>
+
+    <div>
+      <button onclick="trigonometricFunction('atan')">atan</button>
+      <button onclick="trigonometricFunction('tan')">tan</button>
+      <button onclick="logarithm()">ln</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue(' + ')">+</button>
+    </div>
+
+    <div>
+      <button onclick="logarithm('lg')">lg</button>
+      <button onclick="appendValue('Math.PI')">π</button>
+      <button onclick="appendValue('Math.E')">e</button>
       <button id="zeroButton"onclick="appendValue('0')">0</button>
       <button onclick="appendValue('.')">.</button>
       <button onclick="calculate()">=</button>
@@ -92,7 +92,57 @@
         var expression = document.getElementById('display').value;
         var result = eval(expression);
         document.getElementById('display').value = result;
+      }
+
+      function factorial(){
+        var number = document.getElementById('diaplay').value;
+        var result = 1;
+        for (var i = 2; i <= number; i++) {
+          result *= i;
         }
+        document.getElementById('display').value = result;
+      }
+
+      function toggleSign() {
+        var currentValue = parseFloat(document.getElementById('display').value);
+        document.getElementById('display').value = -currentValue;
+      }
+
+      function reciprocal() {
+        var currentValue = parseFloat(document.getElementById('display').value);
+        document.getElementById('display').value = 1 / currentValue;
+      }
+
+      function trigonometricFunction(func){
+        var angle = parseFloat(document.getElementById('display').value);
+        var result = Math[func](angle);
+        document.getElementById('display').value = result;
+      }
+
+      function squareRoot() {
+        var value = parseFloat(document.getElementById('display').value);
+        document.getElementById('display').value = Math.sqrt(value);
+      }
+
+      function logarithm(base) {
+        var value = parseFloat(document.getElementById('display').value);
+        if (base === 'lg') {
+          document.getElementById('display').value = Math.log10(value);
+        } else {
+          document.getElementById('display').value = Math.log(value);
+        }
+      }
+
+      function appendBracket() {
+        var currentValue = document.getElementById('display').value;
+        var lastChar = currentValue[currentValue.leght - 1];
+
+        if (currentValue === '' || lastChar === '(' || lastChar === ')') {
+          document.getElementById('display').value += '(';
+        } else {
+          document.getElementById('display').value += ')';
+        }
+      }
     </script>
   </body>
 </html>
